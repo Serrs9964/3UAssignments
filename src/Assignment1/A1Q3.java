@@ -49,5 +49,18 @@ public class A1Q3 {
          karel.turnLeft();
          karel.move();
          karel.putThing();
+         karel.move();
+         karel.turnLeft();
+         karel.turnLeft();
+         karel.turnLeft();
+         karel.move();
+         karel.turnLeft();
+         karel.move();
+         karel.turnLeft();
+         karel.turnLeft();
+         karel.turnLeft();
+         karel.move();
+         karel.move();
+         karel.turnLeft();
     }
 }
