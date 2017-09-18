@@ -26,22 +26,22 @@ public class A1Q4 {
         new Wall(kitchener, 0,1, Direction.WEST);
         new Wall(kitchener, 1,1, Direction.WEST);
         new Wall(kitchener, 1,1, Direction.SOUTH);
-        while(lerak.frontIsClear()){
             lerak.move();
-            lerak.turnLeft();
-            lerak.move();
-            lerak.move();
-            lerak.turnLeft();
-            lerak.turnLeft();
-            lerak.move();
-            lerak.move();
+            lerak.turnLeft(); 
+            karel.move();
+            karel.move();
+            karel.turnLeft();
             lerak.move();
             lerak.turnLeft();
             lerak.turnLeft();
             lerak.turnLeft();
-            
-            
+            lerak.move();
+            karel.move();
+            lerak.turnLeft();
+            lerak.turnLeft();
+            lerak.turnLeft();
+            lerak.move();
+          
         }
-        lerak.turnLeft();
     }
-}
+
