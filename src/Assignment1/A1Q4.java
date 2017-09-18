@@ -5,6 +5,9 @@
 package Assignment1;
 
 import becker.robots.City;
+import becker.robots.Direction;
+import becker.robots.Robot;
+import becker.robots.Wall;
 
 /**
  *
@@ -18,6 +21,27 @@ public class A1Q4 {
     public static void main(String[] args) {
         // TODO code application logic here
         City kitchener = new City();
-        
+        Robot karel = new Robot(kitchener, 0,0, Direction.SOUTH);
+        Robot lerak = new Robot(kitchener, 0,1, Direction.SOUTH);
+        new Wall(kitchener, 0,1, Direction.WEST);
+        new Wall(kitchener, 1,1, Direction.WEST);
+        new Wall(kitchener, 1,1, Direction.SOUTH);
+        while(lerak.frontIsClear()){
+            lerak.move();
+            lerak.turnLeft();
+            lerak.move();
+            lerak.move();
+            lerak.turnLeft();
+            lerak.turnLeft();
+            lerak.move();
+            lerak.move();
+            lerak.move();
+            lerak.turnLeft();
+            lerak.turnLeft();
+            lerak.turnLeft();
+            
+            
+        }
+        lerak.turnLeft();
     }
 }
