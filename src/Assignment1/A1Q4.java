@@ -24,27 +24,7 @@ public class A1Q4 {
 
         Robot karel = new Robot(kitchener, 0,0, Direction.SOUTH);
         Robot lerak = new Robot(kitchener, 0,1, Direction.SOUTH);
-        new Wall(kitchener, 0,1, Direction.WEST);
-        new Wall(kitchener, 1,1, Direction.WEST);
-        new Wall(kitchener, 1,1, Direction.SOUTH);
-            lerak.move();
-            lerak.turnLeft(); 
-            karel.move();
-            karel.move();
-            karel.turnLeft();
-            lerak.move();
-            lerak.turnLeft();
-            lerak.turnLeft();
-            lerak.turnLeft();
-            lerak.move();
-            karel.move();
-            lerak.turnLeft();
-            lerak.turnLeft();
-            lerak.turnLeft();
-            lerak.move();
-          
-        }
-    }
+        
 
         new Wall(kitchener, 0, 1, Direction.WEST);
         new Wall(kitchener, 1, 1, Direction.WEST);
@@ -67,6 +47,6 @@ public class A1Q4 {
         Lerak.turnLeft();
         Lerak.move();
         
-    
+    }
 }
-/*>>>>>>> branch 'master' of https://github.com/Serrs9964/3UAssignments.git*/
+
