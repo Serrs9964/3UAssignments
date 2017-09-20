@@ -21,6 +21,7 @@ public class A1Q4 {
     public static void main(String[] args) {
         // TODO code application logic here
         City kitchener = new City();
+
         Robot karel = new Robot(kitchener, 0,0, Direction.SOUTH);
         Robot lerak = new Robot(kitchener, 0,1, Direction.SOUTH);
         new Wall(kitchener, 0,1, Direction.WEST);
@@ -45,3 +46,27 @@ public class A1Q4 {
         }
     }
 
+        new Wall(kitchener, 0, 1, Direction.WEST);
+        new Wall(kitchener, 1, 1, Direction.WEST);
+        new Wall(kitchener, 1, 1, Direction.SOUTH);
+        Robot Karel = new Robot(kitchener, 0,0, Direction.SOUTH);
+        Robot Lerak = new Robot(kitchener, 0,1, Direction.SOUTH);
+        Karel.move();
+        Lerak.move();
+        Karel.move();
+        Lerak.turnLeft();
+        Lerak.move();
+        Karel.turnLeft();
+        Lerak.turnLeft();
+        Lerak.turnLeft();
+        Lerak.turnLeft();
+        Lerak.move();
+        Karel.move();
+        Lerak.turnLeft();
+        Lerak.turnLeft();
+        Lerak.turnLeft();
+        Lerak.move();
+        
+    
+}
+/*>>>>>>> branch 'master' of https://github.com/Serrs9964/3UAssignments.git*/
