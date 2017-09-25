@@ -37,15 +37,17 @@ public class A2Q1 {
         Karel.move();
         Karel.canPickThing();
         Karel.pickThing();
-        
-        while (Karel.countThingsInBackpack()){
+       
             
         }
-        
+        Karel.move();
+        Karel.move();
+        Karel.move();
+        Karel.move();
         
     
         }
     
 }
-    }
+    
 
