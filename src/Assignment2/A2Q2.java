@@ -39,7 +39,8 @@ public class A2Q2 {
         
         Robot Karel = new Robot(kitchener, 3, 0, Direction.EAST);
         
-        while(!Karel.frontIsClear()){
+        while(Karel.getAvenue()<8){
+        if(!Karel.frontIsClear()){
             Karel.turnLeft();
             Karel.move();
             Karel.turnLeft();
@@ -52,8 +53,10 @@ public class A2Q2 {
             Karel.move();
             Karel.turnLeft();
         } 
-        while(Karel.frontIsClear()){
+        else{
             Karel.move();
         }
+        
+    }
     }
 }
