@@ -6,6 +6,7 @@ package Assignment2;
 
 import becker.robots.City;
 import becker.robots.Direction;
+import becker.robots.IPredicate;
 import becker.robots.Robot;
 import becker.robots.Wall;
 
@@ -46,7 +47,32 @@ public class A1Q4 {
         new Wall(kitchener, 2, 3, Direction.EAST);
         new Wall(kitchener, 2, 2, Direction.NORTH);
         
-        Robot Karel = new Robot(kitchener, 3, 0, Direction.EAST);
+        Robot Karel = new Robot(kitchener, 1, 0, Direction.SOUTH);
         
+        while(Karel.frontIsClear()){
+        if(!Karel.canPickThing()){
+            Karel.move();
+            Karel.turnLeft();
+            Karel.move();
+            Karel.turnLeft();
+            Karel.turnLeft();
+            Karel.turnLeft();
+            Karel.move();
+            Karel.turnLeft();
+            Karel.turnLeft();
+            Karel.turnLeft();
+            Karel.move();
+            Karel.turnLeft();
+            Karel.move();
+            Karel.move();
+            Karel.turnLeft();
+            Karel.move();
+            
+            
+        } 
+        else{
+            Karel.move();
+        }
     }
+}
 }
