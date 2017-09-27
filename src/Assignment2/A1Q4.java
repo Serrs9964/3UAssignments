@@ -70,9 +70,7 @@ public class A1Q4 {
             
             
         } 
-        else{
-            Karel.move();
-        }
+        
     }
 }
 }
