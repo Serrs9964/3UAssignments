@@ -20,21 +20,38 @@ public class A3Q3 {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-         City kitchener = new City();
-       
-        Robot karel = new Robot(kitchener, 1, 1, Direction.EAST,20);
+        City kitchener = new City();
+
+        Robot karel = new Robot(kitchener, 1, 1, Direction.EAST, 20);
         
-        int moveCounter = 0;
-        while(moveCounter <=9){
-            karel.pickThing();
+        
+        
+        int turnCounter = 0;
+        while (turnCounter <=3){
+         karel.putThing();
+            karel.move();
+            karel.putThing();
+            karel.move();
+            karel.putThing();
+            karel.move();
+            karel.putThing();
             karel.move();
             karel.putThing();
             karel.turnLeft();
             karel.turnLeft();
             karel.move();
+            karel.move();
+            karel.move();
+            karel.move();
             karel.turnLeft();
+            karel.move();
             karel.turnLeft();
-            moveCounter = moveCounter + 1;
+            turnCounter = turnCounter + 1;
+            
+            
+        }
+            
+        
+        }
+        
     }
-}
-}
