@@ -20,8 +20,8 @@ public class A4Q3 {
         System.out.println("Please enter in 4 numbers on separate lines");
         Scanner intake = new Scanner(System.in);
         int convert = intake.nextInt();
-        double inches = convert*1.0;
-        System.out.println(inches);
+        double number = convert*1.0;
+        System.out.print(number);
         
         
         //double inches = convert*2.54;
