@@ -37,30 +37,35 @@ public class Quiz1 {
 
         Robot Karel = new Robot(kitchener, 2, 2, Direction.EAST);
 
-        while (Karel.countThingsInBackpack() < 999) {
+        while (Karel.countThingsInBackpack() < 1) {
             if (Karel.frontIsClear()) {
                 Karel.move();
 
 
-                while (Karel.canPickThing()&& !Karel.canPickThing()) {
+                while (Karel.canPickThing()) {
                     Karel.pickThing();
                     Karel.turnLeft();
                     Karel.turnLeft();
                     while (Karel.frontIsClear()) {
                         Karel.move();
-                        //if(!Karel.frontIsClear())
-                           // Karel.putThing();
-                        
-                            
-                                    
-                            
+                        while (!Karel.frontIsClear()) {
+                            Karel.putThing();
+                            Karel.turnLeft();
+                            Karel.turnLeft();
                         }
+
+                        //if(!Karel.frontIsClear())
+                        // Karel.putThing();
+
+
+
+
                     }
                 }
             }
         }
     }
-
+}
 //else{
 //  Karel.move();
 //}
