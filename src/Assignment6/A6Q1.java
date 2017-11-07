@@ -35,8 +35,6 @@ public class A6Q1 {
             average = average + totalScore[i];
         }
         int totalScores = (int)Math.ceil(average/3);
-        System.out.println("Your average is " + totalScores);
-       
-        
+        System.out.println("Your average is " + totalScores); 
     }
 }
