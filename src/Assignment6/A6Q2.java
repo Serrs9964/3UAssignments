@@ -14,8 +14,15 @@ public class A6Q2 {
 
     /**
      * @param args the command line arguments
+     * Question 2
+*Write a program to read in a series of heights of people and output all those that are
+* above average in height for the group. You will first have to ask how many people 
+* you are going to be reading in to create your array. Once you have this, you can begin 
+* reading in the heights. Save your program as A6Q2.
+
      */
     public static void main(String[] args) {
+        
         // TODO code application logic here
         Scanner intake = new Scanner(System.in);
         System.out.println("How many people are being measured?");
