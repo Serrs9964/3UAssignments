@@ -27,11 +27,12 @@ public class A6Q3_ButBetter {
      *
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        // TODO code application logic here\
+        
         Scanner intake = new Scanner(System.in);
         //
-        System.out.println("Enter your 2 integers");
-        int[] integers = new int[2];
+        System.out.println("Enter your 2 integ");
+        int[] integers = new int[10];
 //store input
         for (int i = 0; i < integers.length; i++) {
             integers[i] = intake.nextInt();
@@ -48,8 +49,7 @@ public class A6Q3_ButBetter {
             System.out.println("here are your ordered integers");
             System.out.println(integers[0]);
             System.out.println(integers[1]);
-        }/*else{
-         System.out.println((integers[0]));
-         System.out.println(integers[1]);*/
+        
     }
+}
 }

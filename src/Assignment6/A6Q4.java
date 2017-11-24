@@ -26,35 +26,53 @@ public class A6Q4 {
          * The pseudocode, something that is code like that describes how something will work, 
          * is the following:
 
-repeat from start to end-1 as x:
-     repeat from x+1 to end as y:
-            if spot[x] > spot[y]:
-                    swap spot[x] with spot[y]
+         repeat from start to end-1 as x:
+         repeat from x+1 to end as y:
+         if spot[x] > spot[y]:
+         swap spot[x] with spot[y]
 
-The idea is we start at a spot and compare every element after that spot. 
-* If we have a number that is smaller, we swap the numbers until we hit the end of the array. 
-* Once we have done this, we are guaranteed to have the smallest element in that spot. 
-* We then move forward to the next spot in our array.*/
-Scanner intake = new Scanner(System.in);
-        System.out.println("How many tests did you take?");
-        int tests = intake.nextInt();
+         The idea is we start at a spot and compare every element after that spot. 
+         * If we have a number that is smaller, we swap the numbers until we hit the end of the array. 
+         * Once we have done this, we are guaranteed to have the smallest element in that spot. 
+         * We then move forward to the next spot in our array.*/
+
+        //get all test scores
         Scanner input = new Scanner(System.in);
-        double[] totalScore = new double[tests];
-        String[] testScores = new String[tests];
-        testScores[0] = "next";
-        
-
+        int[] totalScore = new int[10];
+        String[] testScores = new String[10];
+        testScores[0] = "first";
+        testScores[1] = "second";
+        testScores[2] = "third";
+        testScores[3] = "fourth";
+        testScores[4] = "fifth";
+        testScores[5] = "sixth";
+        testScores[6] = "seventh";
+        testScores[7] = "eigth";
+        testScores[8] = "ninth";
+        testScores[9] = "tenth";
+        //put numbers in an array
+        System.out.println("What did you get on your 10 tests?");
         for (int i = 0; i < testScores.length; i++) {
+            System.out.println(testScores[i] + " test?");
+            totalScore[i] = input.nextInt();
+        }
+        //sort integers from lowest to highest
+        for (int x = 0; x < totalScore.length - 1; x++) {
+            for (int y = x + 1; y < totalScore.length; y++) {
+                if (totalScore[x] > totalScore[y]) {
 
-            System.out.println("What did you get on your " + testScores[i] + " test?");
-            totalScore[i] = input.nextDouble();
+                    int i = totalScore[x];
+                    totalScore[x] = totalScore[y];
+                    totalScore[y] = i;
+                }
+            }
         }
-        double average = 0;
-        for (int i = 0; i < totalScore.length; i++) {
-            average = average + totalScore[i];
+        System.out.println("The number in ascending order are: ");
+        for (int i = 0; i < 10; i++) {
+
+
+            System.out.println(totalScore[i]);
         }
-        int totalScores = (int) Math.ceil(average / tests);
-        System.out.println("Your average is " + totalScores);
 
     }
 }
