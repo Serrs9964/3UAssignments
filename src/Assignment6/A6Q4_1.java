@@ -10,7 +10,7 @@ import java.util.Scanner;
  *
  * @author serrs9964
  */
-public class A6Q4 {
+public class A6Q4_1 {
 
     /**
      * @param args the command line arguments
