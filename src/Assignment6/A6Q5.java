@@ -83,9 +83,9 @@ public class A6Q5 {
             
             total+=  totalScore[i];
         }
-        int testMedia = (int) Math.ceil(total / numberIntegers);
+        int testMedian = (int) Math.ceil(total / numberIntegers);
         
-        System.out.println("Your median is " + testMedia);
+        System.out.println("Your median is " + testMedian);
         }
 }
 

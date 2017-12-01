@@ -11,8 +11,9 @@ import java.util.Scanner;
  * @author serrs9964
  */
 public class A6Q6 {
+
     public static void main(String[] args) {
-    //get all test scores
+        //get all test scores
         Scanner intake = new Scanner(System.in);
         System.out.println("How many people are in your class?");
         int classmates = intake.nextInt();
@@ -48,13 +49,18 @@ public class A6Q6 {
                 }
             }
         }
-        System.out.println("The lowest mark is: ");
-        //for (int i = 0; i < classmates; i++) {
-            System.out.println(totalScore[0]);
-             System.out.println("The highest mark is: ");
-             System.out.println(totalScore[classmates]);
-        }
-    
-    }
+        int highestMark = totalScore.length - 1;
 
-       
+        System.out.println("The lowest mark is: ");
+
+        System.out.println(totalScore[0]);
+        System.out.println("The highest mark is: ");
+        System.out.println(totalScore[highestMark]);
+        int total = 0;
+        for (int u = 0; u > totalScore.length; u++) {
+            total = total + totalScore[u];
+            int totalAvg = total / totalScore[u];
+            System.out.println("Your average is " + totalAvg);
+        }
+    }
+}

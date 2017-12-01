@@ -50,8 +50,10 @@ public class A6Q2 {
             for (int i = 0; i < heights.length; i++) {
                 if (totalScore[i] < average) {
                     System.out.println(totalScore[i]);
+                    
 
                 }
+                
 
             }
         }
