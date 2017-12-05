@@ -29,7 +29,7 @@ public class A7Q2 {
             String letterGrade = "B";
             System.out.println("Your letter grade is " + letterGrade);
         }
-        if (mark >= 80 && mark < 100) {
+        if (mark >= 80 && mark < 101) {
             String letterGrade = "A";
             System.out.println("Your letter grade is " + letterGrade);
         }
