@@ -36,6 +36,6 @@ public class A7Q3 {
         Scanner in = new Scanner(System.in);
         System.out.println("Please enter an integer to find it's divisors");
         int Integer = in.nextInt();
-        test.divisors(Integer);
+        divisors(Integer);
     }
 }
