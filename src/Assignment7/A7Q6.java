@@ -16,23 +16,23 @@ import java.util.Scanner;
  * For example,lastDigit(-947) should return 7.
 
 
-Hint: You can pull apart a number into its digits using / 10 and % 10.*/
-
-
+ Hint: You can pull apart a number into its digits using / 10 and % 10.*/
 public class A7Q6 {
-    public static void lastDigit(double findLastDigit){
+
+    public static void lastDigit(double findLastDigit) {
         //while(findLastDigit.Length > 1){
-         double num = 0;
-         num = findLastDigit%10;
+        double num = 0;
+        num = findLastDigit % 10;
         System.out.println(num);
-        
+
     }
-    public static void main (String[] args){
+
+    public static void main(String[] args) {
         A7Q6 test = new A7Q6();
         Scanner in = new Scanner(System.in);
         System.out.println("Please enter the number you want the last digit of");
-        double findLastDigit = in.nextDouble();
+        double findLastDigit = Math.abs(in.nextDouble());
         test.lastDigit(findLastDigit);
-        
+
     }
 }

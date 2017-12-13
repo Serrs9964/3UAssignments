@@ -32,6 +32,8 @@ public class A7Q2 {
         if (mark >= 80 && mark < 101) {
             String letterGrade = "A";
             System.out.println("Your letter grade is " + letterGrade);
+        } else {
+            System.out.println("your mark cannot be over 100%");
         }
 
     }

@@ -23,12 +23,13 @@ import java.util.Scanner;
 public class A7Q4 {
 
     public static void compoundInterest(double initialBalance, double interestRate, int years) {
-        double interestRate2 = 1+interestRate;
-        double B = Math.pow(interestRate2, years)* initialBalance;
+        double interestRate2 = 1 + interestRate;
+        double B = Math.pow(interestRate2, years) * initialBalance;
         System.out.println(B);
     }
+
     public static void main(String[] args) {
-    A7Q4 test = new A7Q4();
+        A7Q4 test = new A7Q4();
         Scanner in = new Scanner(System.in);
         System.out.println("Please enter your initial bank balance");
         double initialBalance = in.nextDouble();
@@ -39,10 +40,5 @@ public class A7Q4 {
         System.out.println("Please enter the number of years");
         int years = an.nextInt();
         test.compoundInterest(initialBalance, interestRate, years);
+    }
 }
-}
-
-        
-        
-    
-
