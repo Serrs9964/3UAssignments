@@ -9,8 +9,8 @@ package Fun1;
  * @author serrs9964
  */
 public class endoftheworld {
-    public static void endoftheworld(){
+    public double endoftheworld(){
     int endoftheworld = 0/0;
-        System.out.println(endoftheworld);
+        return endoftheworld;
 }
 }
