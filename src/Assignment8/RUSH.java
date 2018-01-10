@@ -55,16 +55,21 @@ public class RUSH extends JComponent {
     boolean down = false;
     boolean shift = false;
     boolean restart = false;
+    boolean collect = false;
+    boolean avoid = false;
     int speed = 1;
     int WallY2 = 0;
-    int WallSpeed = 1600;
-    int WallSpeedMultiplier = 30;
+    int WallSpeed = 30;
+    int TimerSpeed = 50;
+    int WallSpeedMultiplier = 1;
     int YLX = -900;
     int YLY = -900;
     Rectangle P1 = new Rectangle(pacmanX, pacmanY, 75, 75);
-    Rectangle Wall = new Rectangle(WallSpeed, WallY2, 20, 100);
+    Rectangle CollectWall = new Rectangle(WallSpeed, WallY2, 20, 100);
+    Rectangle AvoidWall = new Rectangle(WallSpeed, WallY2, 20, 100);
+    Rectangle Timer = new Rectangle(TimerSpeed, -1000, 20, 100);
     //Rectangle YouLose = new Rectangle(YLX, YLY, 200, 100);
-    int currentScore = 5;
+    int currentScore = 10;
     Font biggerFont = new Font("comicSans", Font.BOLD, 42);
     long elapsed = 0;
     int highScore = 0;
@@ -82,7 +87,7 @@ public class RUSH extends JComponent {
         frame.add(this);
 
         // sets some options and size of the window automatically
-        frame.setResizable(true);
+        frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         // shows the window to the user
@@ -128,7 +133,9 @@ public class RUSH extends JComponent {
         g.setColor(Color.GREEN);
         //spawn obstacles
 
-        g.fillRect(Wall.x, Wall.y, Wall.width, Wall.height);
+        g.fillRect(CollectWall.x, CollectWall.y, CollectWall.width, CollectWall.height);
+        g.setColor(Color.RED);
+        g.fillRect(AvoidWall.x, AvoidWall.y, AvoidWall.width, AvoidWall.height);
         g.setColor(Color.BLUE);
         g.fillRect(0, 100, 1200, 2);
         g.fillRect(0, 200, 1200, 2);
@@ -177,33 +184,74 @@ public class RUSH extends JComponent {
             //Create randomly placed walls
 
             if (WallY == 0) {
-                Wall.y = Random0;
+                CollectWall.y = Random0;
             }
             if (WallY == 1) {
-                Wall.y = Random100;
+                CollectWall.y = Random100;
             }
             if (WallY == 2) {
-                Wall.y = Random200;
+                CollectWall.y = Random200;
             }
             if (WallY == 3) {
-                Wall.y = Random300;
+                CollectWall.y = Random300;
             }
             if (WallY == 4) {
-                Wall.y = Random400;
+                CollectWall.y = Random400;
             }
             if (WallY == 5) {
-                Wall.y = Random500;
+                CollectWall.y = Random500;
             }
             if (WallY == 6) {
-                Wall.y = Random600;
+                CollectWall.y = Random600;
+            }
+            if (WallY == 0) {
+                AvoidWall.y = Random0;
+            }
+            if (WallY == 1) {
+                AvoidWall.y = Random100;
+            }
+            if (WallY == 2) {
+                AvoidWall.y = Random200;
+            }
+            if (WallY == 3) {
+                AvoidWall.y = Random300;
+            }
+            if (WallY == 4) {
+                AvoidWall.y = Random400;
+            }
+            if (WallY == 5) {
+                AvoidWall.y = Random500;
+            }
+            if (WallY == 6) {
+                AvoidWall.y = Random600;
             }
 
             //Move walls
-            Wall.x = Wall.x - WallSpeedMultiplier;
-            if (Wall.x < 0) {
-                Wall.x = 1200;
+            if(collect){
+            CollectWall.x = CollectWall.x - WallSpeed*WallSpeedMultiplier;
+            if (CollectWall.x < 0) {
+                CollectWall.x = 1200;
                 WallY = (int) (Math.random() * (6)) + 0;
-                currentScore = currentScore - 2;
+            }
+            }if(!collect){
+                CollectWall.x = 1300;
+            }
+            if(avoid){
+            AvoidWall.x = AvoidWall.x - WallSpeed*WallSpeedMultiplier;
+            if (AvoidWall.x < 0) {
+                AvoidWall.x = 1200;
+                WallY = (int) (Math.random() * (6)) + 0;
+            }
+            }if(!avoid){
+                AvoidWall.x = 1300;
+            }
+            
+            //timer
+            Timer.x = Timer.x - TimerSpeed;
+            if (Timer.x <= 0) {
+                Timer.x = 1000;
+               
+                currentScore = currentScore - 1;
             }
             //determine normal speed
             if (right) {
@@ -242,15 +290,16 @@ public class RUSH extends JComponent {
 
             //hitboxes
             
-            if (P1.intersects(Wall)) {
+            if (P1.intersects(CollectWall)) {
                 currentScore = currentScore + 1;
                 System.out.println("Player 1 now has " + currentScore + " points!");
             }
-            
-            if (elapsed > 1000) {
-                currentScore = currentScore - 1;
-                elapsed = 0;
+            if (P1.intersects(AvoidWall)) {
+                currentScore = currentScore - 10;
+                System.out.println("Player 1 now has " + currentScore + " points!");
             }
+            //change from collect to avoid and avoid to collect
+           
             //lose the game
             if (currentScore <= 0) {
                 YLX = WIDTH / 2 - 80;
@@ -268,7 +317,7 @@ public class RUSH extends JComponent {
                 highScore = currentScore;
             }
             //restart
-            if(restart){
+            if(restart && currentScore ==0){
                 P1.y = 265;
                 P1.x = 20;
                 currentScore = 10;
