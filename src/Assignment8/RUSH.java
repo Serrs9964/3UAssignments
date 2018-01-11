@@ -38,9 +38,11 @@ public class RUSH extends JComponent {
     // YOUR GAME VARIABLES WOULD GO HERE
     int pacmanX = 50;
     int pacmanY = 275;
-    Random randX = new Random();
-    int WallX = randX.nextInt(6) + 0;
     Random randY = new Random();
+    Random randY2 = new Random();
+    Random randY3 = new Random();
+    int WallZ = randY3.nextInt(6) + 0;
+    int WallX = randY2.nextInt(6) + 0;
     int WallY = randY.nextInt(6) + 0;
     int Random0 = 0;
     int Random100 = 100;
@@ -56,8 +58,10 @@ public class RUSH extends JComponent {
     boolean shift = false;
     boolean restart = false;
     boolean collect = false;
-    boolean avoid = false;
+    boolean avoid = true;
     int speed = 1;
+    int WallY4 = 0;
+    int WallY3 = 0;
     int WallY2 = 0;
     int WallSpeed = 30;
     int TimerSpeed = 50;
@@ -67,6 +71,8 @@ public class RUSH extends JComponent {
     Rectangle P1 = new Rectangle(pacmanX, pacmanY, 75, 75);
     Rectangle CollectWall = new Rectangle(WallSpeed, WallY2, 20, 100);
     Rectangle AvoidWall = new Rectangle(WallSpeed, WallY2, 20, 100);
+    Rectangle AvoidWall2 = new Rectangle(WallSpeed, WallY3, 20, 100);
+    Rectangle AvoidWall3 = new Rectangle(WallSpeed, WallY4, 20, 100);
     Rectangle Timer = new Rectangle(TimerSpeed, -1000, 20, 100);
     //Rectangle YouLose = new Rectangle(YLX, YLY, 200, 100);
     int currentScore = 10;
@@ -136,6 +142,8 @@ public class RUSH extends JComponent {
         g.fillRect(CollectWall.x, CollectWall.y, CollectWall.width, CollectWall.height);
         g.setColor(Color.RED);
         g.fillRect(AvoidWall.x, AvoidWall.y, AvoidWall.width, AvoidWall.height);
+        g.fillRect(AvoidWall2.x, AvoidWall2.y, AvoidWall2.width, AvoidWall2.height);
+        g.fillRect(AvoidWall3.x, AvoidWall3.y, AvoidWall3.width, AvoidWall3.height);
         g.setColor(Color.BLUE);
         g.fillRect(0, 100, 1200, 2);
         g.fillRect(0, 200, 1200, 2);
@@ -149,7 +157,7 @@ public class RUSH extends JComponent {
         g.drawString("" + currentScore, WIDTH - 80, 50);
         g.drawString("" + highScore, WIDTH - 1120, 50);
         g.drawString("Game Over", YLX, YLY);
-        g.drawString("Press 'R' to Restart", YLX-80, YLY + 80);
+        g.drawString("Press 'R' to Restart", YLX - 80, YLY + 80);
         // GAME DRAWING ENDS HERE
     }
 
@@ -225,33 +233,102 @@ public class RUSH extends JComponent {
             if (WallY == 6) {
                 AvoidWall.y = Random600;
             }
+            if (WallY == 0) {
+                AvoidWall2.y = Random0;
+            }
+            if (WallX == 1) {
+                AvoidWall2.y = Random100;
+            }
+            if (WallX == 2) {
+                AvoidWall2.y = Random200;
+            }
+            if (WallX == 3) {
+                AvoidWall2.y = Random300;
+            }
+            if (WallX == 4) {
+                AvoidWall2.y = Random400;
+            }
+            if (WallX == 5) {
+                AvoidWall2.y = Random500;
+            }
+            if (WallX == 6) {
+                AvoidWall2.y = Random600;
+            }
+            if (WallZ == 0) {
+                AvoidWall3.y = Random0;
+            }
+            if (WallZ == 1) {
+                AvoidWall3.y = Random100;
+            }
+            if (WallZ == 2) {
+                AvoidWall3.y = Random200;
+            }
+            if (WallZ == 3) {
+                AvoidWall3.y = Random300;
+            }
+            if (WallZ == 4) {
+                AvoidWall3.y = Random400;
+            }
+            if (WallZ == 5) {
+                AvoidWall3.y = Random500;
+            }
+            if (WallZ == 6) {
+                AvoidWall3.y = Random600;
+            }
 
             //Move walls
-            if(collect){
-            CollectWall.x = CollectWall.x - WallSpeed*WallSpeedMultiplier;
-            if (CollectWall.x < 0) {
-                CollectWall.x = 1200;
-                WallY = (int) (Math.random() * (6)) + 0;
+            if (collect) {
+                CollectWall.x = CollectWall.x - WallSpeed * WallSpeedMultiplier;
+                if (CollectWall.x < 0) {
+                    CollectWall.x = 1200;
+                    WallY = (int) (Math.random() * (6)) + 0;
+                    
+                }
             }
-            }if(!collect){
+            if (!collect) {
                 CollectWall.x = 1300;
             }
-            if(avoid){
-            AvoidWall.x = AvoidWall.x - WallSpeed*WallSpeedMultiplier;
-            if (AvoidWall.x < 0) {
-                AvoidWall.x = 1200;
-                WallY = (int) (Math.random() * (6)) + 0;
+            if (avoid) {
+                AvoidWall.x = AvoidWall.x - WallSpeed * WallSpeedMultiplier;
+                if (AvoidWall.x < 0) {
+                    AvoidWall.x = 1200;
+                    WallY = (int) (Math.random() * (6)) + 0;
+                    
+                }
+                AvoidWall2.x = AvoidWall2.x - WallSpeed * WallSpeedMultiplier;
+                if (AvoidWall2.x < 0) {
+                    AvoidWall2.x = 1200;
+                    WallY2 = (int) (Math.random() * (6)) + 0;
+                    
+                }
+                AvoidWall3.x = AvoidWall3.x - WallSpeed * WallSpeedMultiplier;
+                if (AvoidWall3.x < 0) {
+                    AvoidWall3.x = 1200;
+                    WallY3 = (int) (Math.random() * (6)) + 0;
+                    
+                }
             }
-            }if(!avoid){
+            if (!avoid) {
                 AvoidWall.x = 1300;
             }
-            
-            //timer
-            Timer.x = Timer.x - TimerSpeed;
-            if (Timer.x <= 0) {
-                Timer.x = 1000;
-               
-                currentScore = currentScore - 1;
+
+            //timer for collect
+            if (collect && currentScore > 0) {
+                Timer.x = Timer.x - TimerSpeed;
+                if (Timer.x <= 0) {
+                    Timer.x = 1000;
+
+                    currentScore = currentScore - 1;
+                }
+            }
+            //timer for avoid
+            if (avoid) {
+                Timer.x = Timer.x - TimerSpeed;
+                if (Timer.x <= 0 && currentScore > 0) {
+                    Timer.x = 1000;
+
+                    currentScore = currentScore + 1;
+                }
             }
             //determine normal speed
             if (right) {
@@ -277,7 +354,6 @@ public class RUSH extends JComponent {
             if (P1.x > WIDTH) {
                 P1.x = -60;
             }
-
             if (P1.x < -90) {
                 P1.x = 1200;
             }
@@ -289,17 +365,30 @@ public class RUSH extends JComponent {
             }
 
             //hitboxes
-            
             if (P1.intersects(CollectWall)) {
                 currentScore = currentScore + 1;
                 System.out.println("Player 1 now has " + currentScore + " points!");
             }
             if (P1.intersects(AvoidWall)) {
-                currentScore = currentScore - 10;
+                currentScore = currentScore - 5;
                 System.out.println("Player 1 now has " + currentScore + " points!");
+                collect = true;
+                avoid = false;
+            }
+            if (P1.intersects(AvoidWall2)) {
+                currentScore = currentScore - 5;
+                System.out.println("Player 1 now has " + currentScore + " points!");
+                collect = true;
+                avoid = false;
+            }
+            if (P1.intersects(AvoidWall3)) {
+                currentScore = currentScore - 5;
+                System.out.println("Player 1 now has " + currentScore + " points!");
+                collect = true;
+                avoid = false;
             }
             //change from collect to avoid and avoid to collect
-           
+
             //lose the game
             if (currentScore <= 0) {
                 YLX = WIDTH / 2 - 80;
@@ -317,12 +406,12 @@ public class RUSH extends JComponent {
                 highScore = currentScore;
             }
             //restart
-            if(restart && currentScore ==0){
+            if (restart && currentScore == 0) {
                 P1.y = 265;
                 P1.x = 20;
                 currentScore = 10;
             }
-            
+
             // GAME LOGIC ENDS HERE 
             // update the drawing (calls paintComponent)
             repaint();
