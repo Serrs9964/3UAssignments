@@ -56,6 +56,7 @@ public class RUSH extends JComponent {
     boolean up = false;
     boolean down = false;
     boolean shift = false;
+    boolean start = false;
     boolean restart = false;
     boolean collect = false;
     boolean avoid = true;
@@ -68,6 +69,7 @@ public class RUSH extends JComponent {
     int WallSpeedMultiplier = 1;
     int YLX = -900;
     int YLY = -900;
+    boolean didHit = true;
     Rectangle P1 = new Rectangle(pacmanX, pacmanY, 75, 75);
     Rectangle CollectWall = new Rectangle(WallSpeed, WallY2, 20, 100);
     Rectangle AvoidWall = new Rectangle(WallSpeed, WallY2, 20, 100);
@@ -182,15 +184,18 @@ public class RUSH extends JComponent {
         boolean done = false;
         //System.out.println("Wall X is equal to " + WallX);
         System.out.println("Wall Y is equal to " + WallY);
+        System.out.println("Wall Y is equal to " + WallY2);
+        System.out.println("Wall Y is equal to " + WallY3);
 
         while (!done) {
+            
             // determines when we started so we can keep a framerate
             startTime = System.currentTimeMillis();
             elapsed = elapsed + deltaTime;
             // all your game rules and move is done in here
             // GAME LOGIC STARTS HERE 
             //Create randomly placed walls
-
+if(start){
             if (WallY == 0) {
                 CollectWall.y = Random0;
             }
@@ -282,7 +287,7 @@ public class RUSH extends JComponent {
                 if (CollectWall.x < 0) {
                     CollectWall.x = 1200;
                     WallY = (int) (Math.random() * (6)) + 0;
-                    
+                    didHit = false;
                 }
             }
             if (!collect) {
@@ -308,8 +313,10 @@ public class RUSH extends JComponent {
                     
                 }
             }
-            if (!avoid) {
-                AvoidWall.x = 1300;
+            if (avoid == false) {
+                AvoidWall.x = 2000;
+                AvoidWall2.x = 2000;
+                AvoidWall3.x = 2000;
             }
 
             //timer for collect
@@ -361,28 +368,29 @@ public class RUSH extends JComponent {
                 P1.y = -60;
             }
             if (P1.y < -90) {
-                P1.y = 600;
+                P1.y = 560;
             }
 
             //hitboxes
             if (P1.intersects(CollectWall)) {
                 currentScore = currentScore + 1;
                 System.out.println("Player 1 now has " + currentScore + " points!");
+                didHit = true;
             }
             if (P1.intersects(AvoidWall)) {
-                currentScore = currentScore - 5;
+                currentScore = currentScore - 15;
                 System.out.println("Player 1 now has " + currentScore + " points!");
                 collect = true;
                 avoid = false;
             }
             if (P1.intersects(AvoidWall2)) {
-                currentScore = currentScore - 5;
+                currentScore = currentScore - 15;
                 System.out.println("Player 1 now has " + currentScore + " points!");
                 collect = true;
                 avoid = false;
             }
             if (P1.intersects(AvoidWall3)) {
-                currentScore = currentScore - 5;
+                currentScore = currentScore - 15;
                 System.out.println("Player 1 now has " + currentScore + " points!");
                 collect = true;
                 avoid = false;
@@ -394,8 +402,8 @@ public class RUSH extends JComponent {
                 YLX = WIDTH / 2 - 80;
                 YLY = HEIGHT / 2 - 20;
                 currentScore = 0;
-                P1.x = -100;
-                P1.y = -100;
+                P1.x = -5000;
+                P1.y = -5000;
             }
             if (currentScore > 0) {
                 YLX = -900;
@@ -410,8 +418,10 @@ public class RUSH extends JComponent {
                 P1.y = 265;
                 P1.x = 20;
                 currentScore = 10;
+                avoid = true;
+                collect = false;
             }
-
+            }
             // GAME LOGIC ENDS HERE 
             // update the drawing (calls paintComponent)
             repaint();
@@ -496,6 +506,9 @@ public class RUSH extends JComponent {
             if (key == KeyEvent.VK_R) {
                 restart = true;
             }
+            if (key == KeyEvent.VK_SPACE) {
+                start = true;
+            }
 
 
         }
@@ -535,6 +548,7 @@ public class RUSH extends JComponent {
             if (key == KeyEvent.VK_R) {
                 restart = false;
             }
+           
 
 
         }
