@@ -27,7 +27,7 @@ import java.util.Random;
 public class RUSH extends JComponent {
 
     // Height and Width of our game
-    static final int WIDTH = 1200;
+    static final int WIDTH = 1150;
     static final int HEIGHT = 600;
     //Title of the window
     String title = "Rush";
@@ -36,7 +36,7 @@ public class RUSH extends JComponent {
     long desiredFPS = 60;
     long desiredTime = (1000) / desiredFPS;
     // YOUR GAME VARIABLES WOULD GO HERE
-    int pacmanX = 50;
+    int pacmanX = 30;
     int pacmanY = 275;
     Random randY = new Random();
     Random randY2 = new Random();
@@ -56,10 +56,10 @@ public class RUSH extends JComponent {
     boolean up = false;
     boolean down = false;
     boolean shift = false;
-    boolean start = false;
     boolean restart = false;
-    boolean collect = false;
-    boolean avoid = true;
+    boolean hurdle = true;
+    boolean green = true;
+    boolean didHit = false;
     int speed = 1;
     int WallY4 = 0;
     int WallY3 = 0;
@@ -69,7 +69,6 @@ public class RUSH extends JComponent {
     int WallSpeedMultiplier = 1;
     int YLX = -900;
     int YLY = -900;
-    boolean didHit = true;
     Rectangle P1 = new Rectangle(pacmanX, pacmanY, 75, 75);
     Rectangle CollectWall = new Rectangle(WallSpeed, WallY2, 20, 100);
     Rectangle AvoidWall = new Rectangle(WallSpeed, WallY2, 20, 100);
@@ -81,43 +80,38 @@ public class RUSH extends JComponent {
     Font biggerFont = new Font("comicSans", Font.BOLD, 42);
     long elapsed = 0;
     int highScore = 0;
+
     // GAME VARIABLES END HERE 
     // Constructor to create the Frame and place the panel in
     // You will learn more about this in Grade 12 :)
-
     public RUSH() {
         // creates a windows to show my game
         JFrame frame = new JFrame(title);
-
         // sets the size of my game
         this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         // adds the game to the window
         frame.add(this);
-
         // sets some options and size of the window automatically
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         // shows the window to the user
         frame.setVisible(true);
-
         // add listeners for keyboard and mouse
         frame.addKeyListener(new Keyboard());
         Mouse m = new Mouse();
-
         this.addMouseMotionListener(m);
         this.addMouseWheelListener(m);
         this.addMouseListener(m);
     }
-
     // drawing of the game happens in here
     // we use the Graphics object, g, to perform the drawing
     // NOTE: This is already double buffered!(helps with framerate/speed)
+
     @Override
     public void paintComponent(Graphics g) {
         // always clear the screen first!
         g.clearRect(0, 0, WIDTH, HEIGHT);
-
         // GAME DRAWING GOES HERE
         //draw line
 //g.drawLine(400, 0, 400, 1200);
@@ -188,257 +182,277 @@ public class RUSH extends JComponent {
         System.out.println("Wall Y is equal to " + WallY3);
 
         while (!done) {
-            
+
             // determines when we started so we can keep a framerate
             startTime = System.currentTimeMillis();
-            elapsed = elapsed + deltaTime;
+            //elapsed = elapsed + deltaTime;
             // all your game rules and move is done in here
             // GAME LOGIC STARTS HERE 
             //Create randomly placed walls
-if(start){
-            if (WallY == 0) {
-                CollectWall.y = Random0;
-            }
-            if (WallY == 1) {
-                CollectWall.y = Random100;
-            }
-            if (WallY == 2) {
-                CollectWall.y = Random200;
-            }
-            if (WallY == 3) {
-                CollectWall.y = Random300;
-            }
-            if (WallY == 4) {
-                CollectWall.y = Random400;
-            }
-            if (WallY == 5) {
-                CollectWall.y = Random500;
-            }
-            if (WallY == 6) {
-                CollectWall.y = Random600;
-            }
-            if (WallY == 0) {
-                AvoidWall.y = Random0;
-            }
-            if (WallY == 1) {
-                AvoidWall.y = Random100;
-            }
-            if (WallY == 2) {
-                AvoidWall.y = Random200;
-            }
-            if (WallY == 3) {
-                AvoidWall.y = Random300;
-            }
-            if (WallY == 4) {
-                AvoidWall.y = Random400;
-            }
-            if (WallY == 5) {
-                AvoidWall.y = Random500;
-            }
-            if (WallY == 6) {
-                AvoidWall.y = Random600;
-            }
-            if (WallY == 0) {
-                AvoidWall2.y = Random0;
-            }
-            if (WallX == 1) {
-                AvoidWall2.y = Random100;
-            }
-            if (WallX == 2) {
-                AvoidWall2.y = Random200;
-            }
-            if (WallX == 3) {
-                AvoidWall2.y = Random300;
-            }
-            if (WallX == 4) {
-                AvoidWall2.y = Random400;
-            }
-            if (WallX == 5) {
-                AvoidWall2.y = Random500;
-            }
-            if (WallX == 6) {
-                AvoidWall2.y = Random600;
-            }
-            if (WallZ == 0) {
-                AvoidWall3.y = Random0;
-            }
-            if (WallZ == 1) {
-                AvoidWall3.y = Random100;
-            }
-            if (WallZ == 2) {
-                AvoidWall3.y = Random200;
-            }
-            if (WallZ == 3) {
-                AvoidWall3.y = Random300;
-            }
-            if (WallZ == 4) {
-                AvoidWall3.y = Random400;
-            }
-            if (WallZ == 5) {
-                AvoidWall3.y = Random500;
-            }
-            if (WallZ == 6) {
-                AvoidWall3.y = Random600;
-            }
+            {
+                if (WallY == 0) {
+                    CollectWall.y = Random0;
+                }
+                if (WallY == 1) {
+                    CollectWall.y = Random100;
+                }
+                if (WallY == 2) {
+                    CollectWall.y = Random200;
+                }
+                if (WallY == 3) {
+                    CollectWall.y = Random300;
+                }
+                if (WallY == 4) {
+                    CollectWall.y = Random400;
+                }
+                if (WallY == 5) {
+                    CollectWall.y = Random500;
+                }
+                if (WallY == 6) {
+                    CollectWall.y = Random600;
+                }
+                if (WallY == 0) {
+                    AvoidWall.y = Random0;
+                }
+                if (WallY == 1) {
+                    AvoidWall.y = Random100;
+                }
+                if (WallY == 2) {
+                    AvoidWall.y = Random200;
+                }
+                if (WallY == 3) {
+                    AvoidWall.y = Random300;
+                }
+                if (WallY == 4) {
+                    AvoidWall.y = Random400;
+                }
+                if (WallY == 5) {
+                    AvoidWall.y = Random500;
+                }
+                if (WallY == 6) {
+                    AvoidWall.y = Random600;
+                }
+                if (WallY == 0) {
+                    AvoidWall2.y = Random0;
+                }
+                if (WallX == 1) {
+                    AvoidWall2.y = Random100;
+                }
+                if (WallX == 2) {
+                    AvoidWall2.y = Random200;
+                }
+                if (WallX == 3) {
+                    AvoidWall2.y = Random300;
+                }
+                if (WallX == 4) {
+                    AvoidWall2.y = Random400;
+                }
+                if (WallX == 5) {
+                    AvoidWall2.y = Random500;
+                }
+                if (WallX == 6) {
+                    AvoidWall2.y = Random600;
+                }
+                if (WallZ == 0) {
+                    AvoidWall3.y = Random0;
+                }
+                if (WallZ == 1) {
+                    AvoidWall3.y = Random100;
+                }
+                if (WallZ == 2) {
+                    AvoidWall3.y = Random200;
+                }
+                if (WallZ == 3) {
+                    AvoidWall3.y = Random300;
+                }
+                if (WallZ == 4) {
+                    AvoidWall3.y = Random400;
+                }
+                if (WallZ == 5) {
+                    AvoidWall3.y = Random500;
+                }
+                if (WallZ == 6) {
+                    AvoidWall3.y = Random600;
+                }
 
-            //Move walls
-            if (collect) {
-                CollectWall.x = CollectWall.x - WallSpeed * WallSpeedMultiplier;
-                if (CollectWall.x < 0) {
-                    CollectWall.x = 1200;
-                    WallY = (int) (Math.random() * (6)) + 0;
+
+
+                //hitboxes
+                if (green) {
+                    if (P1.intersects(CollectWall)) {
+                        currentScore = currentScore + 2;
+                        System.out.println("Player 1 now has " + currentScore + " points!");
+                        green = true;
+                        System.out.println(didHit);
+                    }
+                    if (green) {
+                        CollectWall.x = CollectWall.x - WallSpeed * WallSpeedMultiplier;
+                        if (CollectWall.x < 0 && green) {
+                            CollectWall.x = 1200;
+                            WallY = (int) (Math.random() * (6)) + 0;
+                            green = false;
+                        }
+                    }
+                }
+
+                if (!green) {
+                    if (P1.intersects(AvoidWall)) {
+                        currentScore = currentScore - 15;
+                        System.out.println("Player 1 now has " + currentScore + " points!");
+
+                        green = true;
+                    }
+                    if (P1.intersects(AvoidWall2)) {
+                        currentScore = currentScore - 15;
+                        System.out.println("Player 1 now has " + currentScore + " points!");
+
+                        green = true;
+                    }
+                    if (P1.intersects(AvoidWall3)) {
+                        currentScore = currentScore - 15;
+                        System.out.println("Player 1 now has " + currentScore + " points!");
+
+                        green = true;
+                    }
+
+                    AvoidWall.x = AvoidWall.x - WallSpeed * WallSpeedMultiplier;
+                    if (AvoidWall.x < 0) {
+                        AvoidWall.x = 1150;
+                        WallY = (int) (Math.random() * (6)) + 0;
+                    }
+                    AvoidWall2.x = AvoidWall2.x - WallSpeed * WallSpeedMultiplier;
+                    if (AvoidWall2.x < 0) {
+                        AvoidWall2.x = 1150;
+                        WallY2 = (int) (Math.random() * (6)) + 0;
+                    }
+                    AvoidWall3.x = AvoidWall3.x - WallSpeed * WallSpeedMultiplier;
+                    if (AvoidWall3.x < 0) {
+                        AvoidWall3.x = 1150;
+                        WallY3 = (int) (Math.random() * (6)) + 0;
+                    }
+
+                }
+               /* if (P1.intersects(CollectWall)) {
+                    didHit = true;
+                }*/
+                /*if (CollectWall.x < 0) {
                     didHit = false;
+                }*/
+                if (CollectWall.x < 0 && !didHit) {
+                    green = false;
+                    System.out.println(didHit);
                 }
-            }
-            if (!collect) {
-                CollectWall.x = 1300;
-            }
-            if (avoid) {
-                AvoidWall.x = AvoidWall.x - WallSpeed * WallSpeedMultiplier;
-                if (AvoidWall.x < 0) {
-                    AvoidWall.x = 1200;
-                    WallY = (int) (Math.random() * (6)) + 0;
-                    
+                if (!green) {
+                    CollectWall.x = 1150;
                 }
-                AvoidWall2.x = AvoidWall2.x - WallSpeed * WallSpeedMultiplier;
-                if (AvoidWall2.x < 0) {
-                    AvoidWall2.x = 1200;
-                    WallY2 = (int) (Math.random() * (6)) + 0;
-                    
+                if (green) {
+                    AvoidWall.x = 2000;
+                    AvoidWall2.x = 2000;
+                    AvoidWall3.x = 2000;
                 }
-                AvoidWall3.x = AvoidWall3.x - WallSpeed * WallSpeedMultiplier;
-                if (AvoidWall3.x < 0) {
-                    AvoidWall3.x = 1200;
-                    WallY3 = (int) (Math.random() * (6)) + 0;
-                    
-                }
-            }
-            if (avoid == false) {
-                AvoidWall.x = 2000;
-                AvoidWall2.x = 2000;
-                AvoidWall3.x = 2000;
-            }
 
-            //timer for collect
-            if (collect && currentScore > 0) {
-                Timer.x = Timer.x - TimerSpeed;
-                if (Timer.x <= 0) {
-                    Timer.x = 1000;
-
-                    currentScore = currentScore - 1;
+                //timer for didHit
+                if (green && currentScore > 0) {
+                    Timer.x = Timer.x - TimerSpeed;
+                    if (Timer.x <= 0) {
+                        Timer.x = 1000;
+                        currentScore = currentScore - 1;
+                    }
                 }
-            }
-            //timer for avoid
-            if (avoid) {
-                Timer.x = Timer.x - TimerSpeed;
-                if (Timer.x <= 0 && currentScore > 0) {
-                    Timer.x = 1000;
-
-                    currentScore = currentScore + 1;
+                //timer for avoid
+                if (!green) {
+                    Timer.x = Timer.x - TimerSpeed;
+                    if (Timer.x <= 0 && currentScore > 0) {
+                        Timer.x = 1000;
+                        currentScore = currentScore + 1;
+                    }
                 }
-            }
-            //determine normal speed
-            if (right) {
-                P1.x = P1.x + speed * 8;
-            }
-            if (left) {
-                P1.x = P1.x - speed * 8;
-            }
-            if (up) {
-                P1.y = P1.y - speed * 8;
-            }
-            if (down) {
-                P1.y = P1.y + speed * 8;
-            }
-            //determine shift speed
-            if (shift) {
-                speed = 1;
-            } else {
-                speed = 3;
-            }
+
+                //determine normal speed
+                if (right) {
+                    P1.x = P1.x + speed * 8;
+                }
+                if (left) {
+                    P1.x = P1.x - speed * 8;
+                }
+                if (up) {
+                    P1.y = P1.y - speed * 8;
+                }
+                if (down) {
+                    P1.y = P1.y + speed * 8;
+                }
+                //determine shift speed
+                if (shift) {
+                    speed = 3;
+                } else {
+                    speed = 2;
+                }
 
 // if character is outside boundries, return to other side of screen
-            if (P1.x > WIDTH) {
-                P1.x = -60;
-            }
-            if (P1.x < -90) {
-                P1.x = 1200;
-            }
-            if (P1.y > HEIGHT) {
-                P1.y = -60;
-            }
-            if (P1.y < -90) {
-                P1.y = 560;
-            }
-
-            //hitboxes
-            if (P1.intersects(CollectWall)) {
-                currentScore = currentScore + 1;
-                System.out.println("Player 1 now has " + currentScore + " points!");
-                didHit = true;
-            }
-            if (P1.intersects(AvoidWall)) {
-                currentScore = currentScore - 15;
-                System.out.println("Player 1 now has " + currentScore + " points!");
-                collect = true;
-                avoid = false;
-            }
-            if (P1.intersects(AvoidWall2)) {
-                currentScore = currentScore - 15;
-                System.out.println("Player 1 now has " + currentScore + " points!");
-                collect = true;
-                avoid = false;
-            }
-            if (P1.intersects(AvoidWall3)) {
-                currentScore = currentScore - 15;
-                System.out.println("Player 1 now has " + currentScore + " points!");
-                collect = true;
-                avoid = false;
-            }
-            //change from collect to avoid and avoid to collect
-
-            //lose the game
-            if (currentScore <= 0) {
-                YLX = WIDTH / 2 - 80;
-                YLY = HEIGHT / 2 - 20;
-                currentScore = 0;
-                P1.x = -5000;
-                P1.y = -5000;
-            }
-            if (currentScore > 0) {
-                YLX = -900;
-                YLY = -900;
-            }
-            //highscore
-            if (currentScore > highScore) {
-                highScore = currentScore;
-            }
-            //restart
-            if (restart && currentScore == 0) {
-                P1.y = 265;
-                P1.x = 20;
-                currentScore = 10;
-                avoid = true;
-                collect = false;
-            }
-            }
-            // GAME LOGIC ENDS HERE 
-            // update the drawing (calls paintComponent)
-            repaint();
-
-            // SLOWS DOWN THE GAME BASED ON THE FRAMERATE ABOVE
-            // USING SOME SIMPLE MATH
-            deltaTime = System.currentTimeMillis() - startTime;
-            try {
-                if (deltaTime > desiredTime) {
-                    //took too much time, don't wait
-                    Thread.sleep(1);
-                } else {
-                    // sleep to make up the extra time
-                    Thread.sleep(desiredTime - deltaTime);
+                if (P1.x > WIDTH) {
+                    P1.x = -60;
                 }
-            } catch (Exception e) {
-            };
+                if (P1.x < -90) {
+                    P1.x = 1150;
+                }
+                if (P1.y > HEIGHT) {
+                    P1.y = -60;
+                }
+                if (P1.y < -90) {
+                    P1.y = 560;
+                }
+
+
+
+
+                //lose the game
+                if (currentScore <= 0) {
+                    YLX = WIDTH / 2 - 80;
+                    YLY = HEIGHT / 2 - 20;
+                    currentScore = 0;
+                    P1.x = -5000;
+                    P1.y = -5000;
+                }
+                if (currentScore > 0) {
+                    YLX = -900;
+                    YLY = -900;
+                }
+                //highscore
+                if (currentScore > highScore) {
+                    highScore = currentScore;
+                }
+                //restart
+                if (restart && currentScore == 0) {
+                    P1.y = 265;
+                    P1.x = 20;
+                    currentScore = 10;
+                    green = true;
+                }
+                /*if (didHit) {
+                 hurdle = true;
+                 }
+                 if (!didHit) {
+                 hurdle = false;
+                 }*/
+
+                // GAME LOGIC ENDS HERE 
+                // update the drawing (calls paintComponent)
+                repaint();
+
+                // SLOWS DOWN THE GAME BASED ON THE FRAMERATE ABOVE
+                // USING SOME SIMPLE MATH
+                deltaTime = System.currentTimeMillis() - startTime;
+                try {
+                    if (deltaTime > desiredTime) {
+                        //took too much time, don't wait
+                        Thread.sleep(1);
+                    } else {
+                        // sleep to make up the extra time
+                        Thread.sleep(desiredTime - deltaTime);
+                    }
+                } catch (Exception e) {
+                };
+            }
         }
     }
 
@@ -506,9 +520,14 @@ if(start){
             if (key == KeyEvent.VK_R) {
                 restart = true;
             }
-            if (key == KeyEvent.VK_SPACE) {
-                start = true;
+            if (key == KeyEvent.VK_Z) {
+                green = true;
             }
+            if (key == KeyEvent.VK_X) {
+                green = false;
+            }
+            
+
 
 
         }
@@ -548,7 +567,7 @@ if(start){
             if (key == KeyEvent.VK_R) {
                 restart = false;
             }
-           
+
 
 
         }
