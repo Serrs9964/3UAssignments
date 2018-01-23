@@ -36,21 +36,14 @@ public class RUSH extends JComponent {
     long desiredFPS = 60;
     long desiredTime = (1000) / desiredFPS;
     // YOUR GAME VARIABLES WOULD GO HERE
-    int pacmanX = 30;
-    int pacmanY = 275;
+    int pacmanX = 300;
+    int pacmanY = 320;
     Random randY = new Random();
     Random randY2 = new Random();
     Random randY3 = new Random();
     int WallZ = randY3.nextInt(6) + 0;
     int WallX = randY2.nextInt(6) + 0;
     int WallY = randY.nextInt(6) + 0;
-    int Random0 = 0;
-    int Random100 = 100;
-    int Random200 = 200;
-    int Random300 = 300;
-    int Random400 = 400;
-    int Random500 = 500;
-    int Random600 = 600;
     boolean right = false;
     boolean left = false;
     boolean up = false;
@@ -60,21 +53,25 @@ public class RUSH extends JComponent {
     boolean hurdle = true;
     boolean green = true;
     boolean didHit = false;
-    int speed = 1;
+    int speed = 3;
+    int speed2 = 100;
     int WallY4 = 0;
     int WallY3 = 0;
     int WallY2 = 0;
-    int WallSpeed = 30;
+    int WallSpeed = 20;
+    int WallSpeed2 = 20;
     int TimerSpeed = 50;
+    int Timer2Speed = 50;
     int WallSpeedMultiplier = 1;
     int YLX = -900;
     int YLY = -900;
-    Rectangle P1 = new Rectangle(pacmanX, pacmanY, 75, 75);
+    Rectangle P1 = new Rectangle(pacmanX, pacmanY, 60, 60);
     Rectangle CollectWall = new Rectangle(WallSpeed, WallY2, 20, 100);
     Rectangle AvoidWall = new Rectangle(WallSpeed, WallY2, 20, 100);
     Rectangle AvoidWall2 = new Rectangle(WallSpeed, WallY3, 20, 100);
     Rectangle AvoidWall3 = new Rectangle(WallSpeed, WallY4, 20, 100);
     Rectangle Timer = new Rectangle(TimerSpeed, -1000, 20, 100);
+    Rectangle Timer2 = new Rectangle(Timer2Speed, -1000, 20, 100);
     //Rectangle YouLose = new Rectangle(YLX, YLY, 200, 100);
     int currentScore = 10;
     Font biggerFont = new Font("comicSans", Font.BOLD, 42);
@@ -190,128 +187,56 @@ public class RUSH extends JComponent {
             // GAME LOGIC STARTS HERE 
             //Create randomly placed walls
             {
-                if (WallY == 0) {
-                    CollectWall.y = Random0;
-                }
-                if (WallY == 1) {
-                    CollectWall.y = Random100;
-                }
-                if (WallY == 2) {
-                    CollectWall.y = Random200;
-                }
-                if (WallY == 3) {
-                    CollectWall.y = Random300;
-                }
-                if (WallY == 4) {
-                    CollectWall.y = Random400;
-                }
-                if (WallY == 5) {
-                    CollectWall.y = Random500;
-                }
-                if (WallY == 6) {
-                    CollectWall.y = Random600;
-                }
-                if (WallY == 0) {
-                    AvoidWall.y = Random0;
-                }
-                if (WallY == 1) {
-                    AvoidWall.y = Random100;
-                }
-                if (WallY == 2) {
-                    AvoidWall.y = Random200;
-                }
-                if (WallY == 3) {
-                    AvoidWall.y = Random300;
-                }
-                if (WallY == 4) {
-                    AvoidWall.y = Random400;
-                }
-                if (WallY == 5) {
-                    AvoidWall.y = Random500;
-                }
-                if (WallY == 6) {
-                    AvoidWall.y = Random600;
-                }
-                if (WallY == 0) {
-                    AvoidWall2.y = Random0;
-                }
-                if (WallX == 1) {
-                    AvoidWall2.y = Random100;
-                }
-                if (WallX == 2) {
-                    AvoidWall2.y = Random200;
-                }
-                if (WallX == 3) {
-                    AvoidWall2.y = Random300;
-                }
-                if (WallX == 4) {
-                    AvoidWall2.y = Random400;
-                }
-                if (WallX == 5) {
-                    AvoidWall2.y = Random500;
-                }
-                if (WallX == 6) {
-                    AvoidWall2.y = Random600;
-                }
-                if (WallZ == 0) {
-                    AvoidWall3.y = Random0;
-                }
-                if (WallZ == 1) {
-                    AvoidWall3.y = Random100;
-                }
-                if (WallZ == 2) {
-                    AvoidWall3.y = Random200;
-                }
-                if (WallZ == 3) {
-                    AvoidWall3.y = Random300;
-                }
-                if (WallZ == 4) {
-                    AvoidWall3.y = Random400;
-                }
-                if (WallZ == 5) {
-                    AvoidWall3.y = Random500;
-                }
-                if (WallZ == 6) {
-                    AvoidWall3.y = Random600;
-                }
+                CollectWall.y = WallY * 100;
+                AvoidWall.y = WallY * 100;
+                AvoidWall2.y = WallX * 100;
+                AvoidWall3.y = WallZ * 100;
+
 
 
 
                 //hitboxes
                 if (green) {
                     if (P1.intersects(CollectWall)) {
-                        currentScore = currentScore + 2;
-                        System.out.println("Player 1 now has " + currentScore + " points!");
-                        green = true;
-                        System.out.println(didHit);
+                        currentScore = currentScore + 3;
+                        //System.out.println("Player 1 now has " + currentScore + " points!");
+                        didHit = true;
+                        //System.out.println(didHit);
+                        
                     }
                     if (green) {
                         CollectWall.x = CollectWall.x - WallSpeed * WallSpeedMultiplier;
                         if (CollectWall.x < 0 && green) {
-                            CollectWall.x = 1200;
+                            CollectWall.x = 1700;
                             WallY = (int) (Math.random() * (6)) + 0;
-                            green = false;
+                            
+                            if (!didHit) {
+                                green = false;
+                                
+                            }
+                            didHit = false;
                         }
+                       
                     }
                 }
 
                 if (!green) {
                     if (P1.intersects(AvoidWall)) {
-                        currentScore = currentScore - 15;
-                        System.out.println("Player 1 now has " + currentScore + " points!");
-
+                        currentScore = currentScore - 30;
+                        //System.out.println("Player 1 now has " + currentScore + " points!");
+                        
                         green = true;
                     }
                     if (P1.intersects(AvoidWall2)) {
                         currentScore = currentScore - 15;
-                        System.out.println("Player 1 now has " + currentScore + " points!");
-
+                        //System.out.println("Player 1 now has " + currentScore + " points!");
+                        
                         green = true;
                     }
                     if (P1.intersects(AvoidWall3)) {
-                        currentScore = currentScore - 15;
-                        System.out.println("Player 1 now has " + currentScore + " points!");
-
+                        currentScore = currentScore - 45;
+                        //System.out.println("Player 1 now has " + currentScore + " points!");
+                        
                         green = true;
                     }
 
@@ -332,12 +257,15 @@ public class RUSH extends JComponent {
                     }
 
                 }
-               /* if (P1.intersects(CollectWall)) {
-                    didHit = true;
-                }*/
+                if(WallSpeed > 33){
+                    WallSpeed = 33;
+                }
+                /* if (P1.intersects(CollectWall)) {
+                 didHit = true;
+                 }*/
                 /*if (CollectWall.x < 0) {
-                    didHit = false;
-                }*/
+                 didHit = false;
+                 }*/
                 if (CollectWall.x < 0 && !didHit) {
                     green = false;
                     System.out.println(didHit);
@@ -355,7 +283,7 @@ public class RUSH extends JComponent {
                 if (green && currentScore > 0) {
                     Timer.x = Timer.x - TimerSpeed;
                     if (Timer.x <= 0) {
-                        Timer.x = 1000;
+                        Timer.x = 600;
                         currentScore = currentScore - 1;
                     }
                 }
@@ -365,21 +293,35 @@ public class RUSH extends JComponent {
                     if (Timer.x <= 0 && currentScore > 0) {
                         Timer.x = 1000;
                         currentScore = currentScore + 1;
+                        Timer2Speed = Timer2Speed + 1;
                     }
-                }
+                    
+                    
+                    
+                    }
+                Timer2.x = Timer2.x - Timer2Speed;
+                    if (Timer2.x <= 0) {
+                        Timer2.x = 30000;
+                        WallSpeed = WallSpeed + 1;
+                        System.out.println(WallSpeed);
+                    }
 
                 //determine normal speed
                 if (right) {
-                    P1.x = P1.x + speed * 8;
+                    P1.x = P1.x + speed* 8;
                 }
+                
                 if (left) {
-                    P1.x = P1.x - speed * 8;
+                    P1.x = P1.x - speed* 8;
                 }
+                
                 if (up) {
-                    P1.y = P1.y - speed * 8;
+                    P1.y = P1.y - speed2;// * 8;
+                    up = false;
                 }
                 if (down) {
-                    P1.y = P1.y + speed * 8;
+                    P1.y = P1.y + speed2;// * 8;
+                    down = false;
                 }
                 //determine shift speed
                 if (shift) {
@@ -390,16 +332,16 @@ public class RUSH extends JComponent {
 
 // if character is outside boundries, return to other side of screen
                 if (P1.x > WIDTH) {
-                    P1.x = -60;
+                    P1.x = -30;
                 }
-                if (P1.x < -90) {
+                if (P1.x < -30) {
                     P1.x = 1150;
                 }
                 if (P1.y > HEIGHT) {
-                    P1.y = -60;
+                    P1.y = 20;
                 }
-                if (P1.y < -90) {
-                    P1.y = 560;
+                if (P1.y < 0) {
+                    P1.y = 520;
                 }
 
 
@@ -422,11 +364,15 @@ public class RUSH extends JComponent {
                     highScore = currentScore;
                 }
                 //restart
-                if (restart && currentScore == 0) {
-                    P1.y = 265;
-                    P1.x = 20;
+                if (restart) {
+                    P1.y = 320;
+                    P1.x = 275;
                     currentScore = 10;
                     green = true;
+                    WallSpeed = 20;
+                    WallSpeedMultiplier = 1;
+                    CollectWall.x = 1150;
+                    AvoidWall.x = 1150;
                 }
                 /*if (didHit) {
                  hurdle = true;
@@ -526,7 +472,7 @@ public class RUSH extends JComponent {
             if (key == KeyEvent.VK_X) {
                 green = false;
             }
-            
+
 
 
 
@@ -555,12 +501,12 @@ public class RUSH extends JComponent {
             if (key == KeyEvent.VK_LEFT) {
                 left = false;
             }
-            if (key == KeyEvent.VK_UP) {
-                up = false;
-            }
-            if (key == KeyEvent.VK_DOWN) {
-                down = false;
-            }
+            //if (key == KeyEvent.VK_UP) {
+              //  up = false;
+            //}
+            //if (key == KeyEvent.VK_DOWN) {
+            //    down = false;
+            //}
             if (key == KeyEvent.VK_SHIFT) {
                 shift = false;
             }
