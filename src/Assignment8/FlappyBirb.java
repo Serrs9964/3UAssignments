@@ -1,4 +1,4 @@
-/*
+  /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -53,10 +53,11 @@ public class FlappyBirb extends JComponent {
     int WallX = 780;
     int speed = 1;
     int WallY2= 0;
-    int WallSpeed = 1;
+    int WallSpeed = 2;
     int WallSpeedMultiplier = 20;
     Rectangle WallTop = new Rectangle(WallX, 0, 20, 200);
     Rectangle WallBot = new Rectangle(WallX,400,20, 200);
+    int score = 0;
     // GAME VARIABLES END HERE   
 
     
@@ -97,8 +98,8 @@ public class FlappyBirb extends JComponent {
 
         // GAME DRAWING GOES HERE
         g.setColor(Color.BLACK);
-       g.fillRect(WallTop.x, WallTop.y, WallTop.width, WallTop.height);
-        g.fillRect(WallBot.x, WallBot.y, WallBot.width, WallBot.height);
+       g.fillRect(WallX, WallTop.y, WallTop.width, WallTop.height);
+        g.fillRect(WallX, WallBot.y, WallBot.width, WallBot.height);
             
         
         g.setColor(Color.red);
@@ -134,7 +135,7 @@ public class FlappyBirb extends JComponent {
 
             // all your game rules and move is done in here
             // GAME LOGIC STARTS HERE 
-            WallX = WallX - WallSpeed;
+           
             if(restart){
                 player.x = 50;
                 player.y=360;
@@ -142,6 +143,9 @@ public class FlappyBirb extends JComponent {
                 playerDX = 0;
             }
             
+            if(WallX < -50){
+                WallX = 800;
+            }
             
             
             if(right){
@@ -159,8 +163,15 @@ public class FlappyBirb extends JComponent {
                 playerDY = -15;
                 
             }
-            
-            
+            if(player.intersects(WallTop)){
+                score = score +1;
+                System.out.println(score);
+            }
+            if(player.intersects(WallBot)){
+                score = score +1;
+                System.out.println(score);
+            }
+             WallX = WallX - WallSpeed;
             //do a gravy boi
             playerDY = playerDY + gravity;
             
