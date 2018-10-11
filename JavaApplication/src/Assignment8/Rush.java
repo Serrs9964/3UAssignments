@@ -529,3 +529,4 @@ public class Rush extends JComponent {
         game.run();
     }
 }
+//Checking
